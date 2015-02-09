@@ -28,6 +28,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "empresa", catalog = "tris_cmi", schema = "cmi")
 @NamedQueries({
+    @NamedQuery(name = "Empresa.count", query = "SELECT COUNT(e) FROM Empresa e"),
     @NamedQuery(name = "Empresa.findAll", query = "SELECT e FROM Empresa e"),
     @NamedQuery(name = "Empresa.findByIdEmpresa", query = "SELECT e FROM Empresa e WHERE e.idEmpresa = :idEmpresa"),
     @NamedQuery(name = "Empresa.findByNombre", query = "SELECT e FROM Empresa e WHERE e.nombre = :nombre"),
