@@ -6,6 +6,8 @@
 package com.triskel.cmi.ejb.dao;
 
 
+import com.triskel.cmi.ejb.entities.Empresa;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -20,9 +22,17 @@ public class EmpresaDaoTest extends GenericoTest{
         Integer numeroDatos = empresaDao.contarDatos();
         logger.error("numeroDatos: " + numeroDatos);        
         
-        Assert.assertNotSame(1, numeroDatos);
+        Assert.assertNotSame(1, numeroDatos);                
+    }
+    
+    
+    @Test
+    public void buscarTodoTest(){
+        List<Empresa> lista = empresaDao.searchAll();
         
-        
+        for(Empresa tmp : lista){
+            logger.error("tmp.getNombre(): " + tmp.getNombre());        
+        }                
     }
     
 }

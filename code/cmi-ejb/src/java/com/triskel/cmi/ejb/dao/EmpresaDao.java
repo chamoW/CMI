@@ -6,6 +6,7 @@
 package com.triskel.cmi.ejb.dao;
 
 import com.triskel.cmi.ejb.entities.Empresa;
+import java.util.List;
 import javax.persistence.Query;
 
 /**
@@ -15,10 +16,14 @@ import javax.persistence.Query;
 
 public class EmpresaDao extends Generico{
     
-    public Integer contarDatos(){
-        
-        Query query = this.entityManager.createNamedQuery("Empresa.count", Empresa.class);
-        return query.getFirstResult();
+    public Integer contarDatos(){        
+        Query query = this.entityManager.createNamedQuery("Empresa.count");
+        return ((Number)query.getSingleResult()).intValue();
+    }
+    
+    public List<Empresa> searchAll(){
+        Query query = this.entityManager.createNamedQuery("Empresa.findAll", Empresa.class);
+        return query.getResultList();
     }
     
 }

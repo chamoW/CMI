@@ -11,7 +11,7 @@ import java.util.Properties;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import org.apache.openjpa.persistence.PersistenceException;
+
 
 import org.junit.After;
 import org.junit.Before;
@@ -31,24 +31,24 @@ public class GenericoTest {
     
     @After
     public void cerraSession(){
-        logger.error("cerraSession");
-       entityManager.close();
+        //logger.error("cerraSession");
+        entityManager.close();
     }
 
     @Before
-    public void iniciarContenedor(){
+    public void iniciarContenedor(){        
+        //logger.error("iniciarContenedor");                          
+        Properties props = new Properties();        
+        props.put("eclipselink.logging.level.sql" ,"FINE");        
+        props.put("eclipselink.logging.logger" ,"DefaultLogger");                 
+        props.put("eclipselink.logging.level" ,"WARNING");                 
+        props.put("javax.persistence.jdbc.driver", "org.postgresql.Driver");
+        props.put("javax.persistence.jdbc.url", "jdbc:postgresql://localhost:5432/tris_cmi");
+        props.put("javax.persistence.jdbc.user", "postgres");
+        props.put("javax.persistence.jdbc.password", "root");
+        //props.put("openjpa.DynamicEnhancementAgent","false");
+        //props.put("openjpa.Log", "DefaultLeve=WARN,SQL=TRACE");
         
-        logger.error("iniciarContenedor");
-       
-            
-        
-        Properties props = new Properties();
-        props.put("openjpa.Log", "DefaultLeve=WARN,SQL=TRACE");
-        props.put("openjpa.ConnectionDriverName", "org.postgresql.Driver");
-        props.put("openjpa.ConnectionURL", "jdbc:postgresql://localhost:5432/tris_cmi");
-        props.put("openjpa.ConnectionUserName", "postgres");
-        props.put("openjpa.ConnectionPassword", "root");
-        props.put("openjpa.DynamicEnhancementAgent","false");
                 
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("cmi-ejbPU", props);
         entityManager = factory.createEntityManager();
