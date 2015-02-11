@@ -18,12 +18,8 @@ import javax.persistence.PersistenceContext;
 @Stateless
 @LocalBean
 public class Generico {
-    @PersistenceContext (name = "cmi-ejbPU")
-    private EntityManager entityManager;
-
-    public EntityManager getEntityManager() {
-        return entityManager;
-    }
+    @PersistenceContext
+    protected EntityManager entityManager;
 
     public void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;

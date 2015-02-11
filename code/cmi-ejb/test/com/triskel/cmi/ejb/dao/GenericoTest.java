@@ -6,19 +6,24 @@
 package com.triskel.cmi.ejb.dao;
 
 import com.triskel.cmi.ejb.dao.EmpresaDao;
+import com.triskel.cmi.ejb.dao.EmpresaDao;
 import java.util.Properties;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import org.apache.openjpa.persistence.PersistenceException;
+
 import org.junit.After;
 import org.junit.Before;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 /**
  * Clase para configurar el persistence context y realizar pruebas unitarias
  * @author wwlopez
  */
 public class GenericoTest {
-    //protected static ILogger logger = LogFactory .getLogger(BranchTestBase.class);
+    protected static final Logger logger = LogManager.getLogger(GenericoTest.class);
            
     static EntityManager entityManager;
     static EmpresaDao empresaDao;
@@ -26,29 +31,31 @@ public class GenericoTest {
     
     @After
     public void cerraSession(){
-        entityManager.close();
+        logger.error("cerraSession");
+       entityManager.close();
     }
 
     @Before
     public void iniciarContenedor(){
         
-        
+        logger.error("iniciarContenedor");
+       
+            
         
         Properties props = new Properties();
-        props.put("openjpa.Log", "DefaultLeve=WARN,SQL=TRANCE");
+        props.put("openjpa.Log", "DefaultLeve=WARN,SQL=TRACE");
         props.put("openjpa.ConnectionDriverName", "org.postgresql.Driver");
-        props.put("openjpa.ConnectionURL", "jdbc:postgres:localhost:5432");
+        props.put("openjpa.ConnectionURL", "jdbc:postgresql://localhost:5432/tris_cmi");
         props.put("openjpa.ConnectionUserName", "postgres");
         props.put("openjpa.ConnectionPassword", "root");
-        
-        
+        props.put("openjpa.DynamicEnhancementAgent","false");
+                
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("cmi-ejbPU", props);
         entityManager = factory.createEntityManager();
         
         empresaDao = new EmpresaDao();
         empresaDao.setEntityManager(entityManager);
-               
-        
+       
     }
             
 }

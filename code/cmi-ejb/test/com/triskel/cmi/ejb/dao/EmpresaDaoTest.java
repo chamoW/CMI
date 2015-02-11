@@ -5,6 +5,8 @@
  */
 package com.triskel.cmi.ejb.dao;
 
+
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -16,7 +18,10 @@ public class EmpresaDaoTest extends GenericoTest{
     @Test
     public void contarTest(){
         Integer numeroDatos = empresaDao.contarDatos();
-        System.out.println("numeroDatos: " + numeroDatos);
+        logger.error("numeroDatos: " + numeroDatos);        
+        
+        Assert.assertNotSame(1, numeroDatos);
+        
         
     }
     
