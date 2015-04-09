@@ -1,27 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.1" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_1.xsd">
-    <persistence-unit name="cmi-ejbPU" transaction-type="JTA">
-        
-        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        <jta-data-source>jdbc/cmi</jta-data-source>
-        <class>com.triskel.cmi.ejb.entities.Catalogo</class>
-        <class>com.triskel.cmi.ejb.entities.DetalleFoda</class>
-        <class>com.triskel.cmi.ejb.entities.Empresa</class>        
-        <class>com.triskel.cmi.ejb.entities.Foda</class>
-        <class>com.triskel.cmi.ejb.entities.MatrizDaPK</class>
-        <class>com.triskel.cmi.ejb.entities.MatrizDoPK</class>
-        <class>com.triskel.cmi.ejb.entities.MatrizFaPK</class>  
-        <class>com.triskel.cmi.ejb.entities.MatrizFoPK</class>                
-        <class>com.triskel.cmi.ejb.entities.MatrizDa</class>
-        <class>com.triskel.cmi.ejb.entities.MatrizDo</class>
-        <class>com.triskel.cmi.ejb.entities.MatrizFa</class>
-        <class>com.triskel.cmi.ejb.entities.MatrizFo</class>
-        <class>com.triskel.cmi.ejb.entities.Tabla</class>
-               
-        
-        <exclude-unlisted-classes>true</exclude-unlisted-classes>
-        <properties>				            
-            <!--<property name="openjpa.jdbc.DBDictionary" value="postgres" />-->            
-        </properties>
-    </persistence-unit>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="cmi-ejbPU" transaction-type="JTA">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <jta-data-source>jdbc/cmi</jta-data-source>
+
+    <!--
+     <properties>
+            <property name="eclipselink.cache.shared.default" value="false"/>
+            <property name="eclipselink.jdbc.cache-statements" value="true"/>
+            <property name="eclipselink.cache.shared.Customer" value="true"/>
+            <property name="eclipselink.jdbc.batch-writing" value="JDBC"/>
+            <property name="eclipselink.persistence-context.close-on-commit" value="true"/>
+            <property name="eclipselink.persistence-context.persist-on-commit" value="false"/>
+            <property name="eclipselink.cache.size.default" value="0"/>
+            <property name="eclipselink.cache.type.default" value="None"/>
+            <property name="eclipselink.logging.logger" value="ServerLogger" />
+            <property name="eclipselink.logging.level" value="OFF" />
+            <property name="eclipselink.orm.validate.schema" value="true"/>
+            <property name="eclipselink.target-database" value="PostgreSQL"/>
+            <property name="eclipselink.persistence-context.flush-mode" value="commit"/>
+            <property name="eclipselink.logging.session" value="false" />
+            <property name="eclipselink.logging.thread" value="false" />
+        </properties>-->
+  </persistence-unit>
 </persistence>
