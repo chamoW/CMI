@@ -1,0 +1,341 @@
+<ui:composition template="../template/main.xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="title">
+        <h:outputText value="Administracion del Cuadro de Mando Integral"></h:outputText>
+    </ui:define>
+
+    <ui:define name="contenido">
+        <h:form id="frmFinanciera">
+            <p:panel header="PERSPECTIVA FINANCIERA" toggleable="true" toggleSpeed="500" widgetVar="pnFinanciera" style="margin-bottom:20px">   
+                <f:facet name="actions">
+                    <p:commandLink styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"
+                                   actionListener="#{cmiController.seleccionarPersectiva(1)}"
+                                   oncomplete="PF('modal').show();">
+                        <h:outputText styleClass="ui-icon ui-icon-document" title="Nuevo Registro"  />
+                    </p:commandLink>
+                    <p:commandLink styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"
+                                   onclick="PF('pnFinanciera').toggle()"
+                                   oncomplete="PF('modal').show();">
+                        <h:outputText styleClass="ui-icon-newwin" title="Toggle"  />
+                    </p:commandLink>
+                </f:facet>
+
+                <p:dataTable value="#{cmiController.listFinanciera}" var="item">
+                    <p:columnGroup type="header">                     
+                        <p:row>
+                            <p:column colspan="2" headerText="DIRECCIÓN - OBJETIVOS ESTRATÉGICOS" />
+                            <p:column colspan="4" headerText="MEDIDAS" />
+                            <p:column colspan="3" headerText="METAS" />                            
+                        </p:row>
+                        <p:row>
+                            <p:column headerText="Estrategia Valor" />
+                            <p:column headerText="Objetivo" />
+                            <p:column headerText="Indicador" />
+                            <p:column headerText="Definicion Operacional" />
+                            <p:column headerText="Frecuencia" />
+                            <p:column headerText="Nivel Base" />
+                            <p:column headerText="Meta" />
+                            <p:column headerText="Nivel Jerarquico" />
+                            <p:column headerText="Responsable" />                            
+                            <p:column headerText="Opciones" />                            
+                        </p:row>
+                    </p:columnGroup>
+
+                    <p:column><h:outputText value="#{item.estrategiaValor}" /></p:column>
+                    <p:column><h:outputText value="#{item.objetivo}" /></p:column>
+                    <p:column><h:outputText value="#{item.indicador}" /></p:column>
+                    <p:column><h:outputText value="#{item.definicionOperacional}" /></p:column>
+                    <p:column><h:outputText value="#{item.frecuencia.nombre}" /></p:column>
+                    <p:column><h:outputText value="#{item.minimo}" /></p:column>
+                    <p:column><h:outputText value="#{item.meta}" /></p:column>
+                    <p:column><h:outputText value="#{item.nivelOperativo.nombre}" /></p:column>
+                    <p:column><h:outputText value="#{item.empleado.nombres} #{item.empleado.apellidos}" /></p:column>
+
+                    <p:column>
+                        <p:commandButton update=":frmModal" icon="ui-icon-pencil"
+                                         title="Editar" oncomplete="PF('modal').show();"
+                                         actionListener="#{cmiController.seleccionarPersectiva(1)}">
+                            <f:setPropertyActionListener target="#{cmiController.current}" value="#{item}" />
+                        </p:commandButton>
+                        <p:commandButton rendered="false"  update=":#{p:component('frmFinanciera')}" icon="ui-icon-trash"
+                                         title="Eliminar" actionListener="#{cmiController.delete(1, item)}">                                                        
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>               
+            </p:panel>
+        </h:form>
+
+
+        <h:form id="frmCliente">
+            <p:panel header="PERSPECTIVA CLIENTE" toggleable="true" toggleSpeed="500" widgetVar="pnCliente" style="margin-bottom:20px">   
+                <f:facet name="actions">
+                    <p:commandLink styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"
+                                   actionListener="#{cmiController.seleccionarPersectiva(2)}"
+                                   oncomplete="PF('modal').show();">
+                        <h:outputText styleClass="ui-icon ui-icon-document" title="Nuevo Registro"  />
+                    </p:commandLink>
+                    <p:commandLink styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"
+                                   onclick="PF('pnFinanciera').toggle()"
+                                   oncomplete="PF('modal').show();">
+                        <h:outputText styleClass="ui-icon-newwin" title="Toggle"  />
+                    </p:commandLink>
+                </f:facet>
+
+                <p:dataTable value="#{cmiController.listCliente}" var="item">
+
+                   <p:columnGroup type="header">                     
+                        <p:row>
+                            <p:column colspan="2" headerText="DIRECCIÓN - OBJETIVOS ESTRATÉGICOS" />
+                            <p:column colspan="4" headerText="MEDIDAS" />
+                            <p:column colspan="3" headerText="METAS" />                            
+                        </p:row>
+                        <p:row>
+                            <p:column headerText="Estrategia Valor" />
+                            <p:column headerText="Objetivo" />
+                            <p:column headerText="Indicador" />
+                            <p:column headerText="Definicion Operacional" />
+                            <p:column headerText="Frecuencia" />
+                            <p:column headerText="Nivel Base" />
+                            <p:column headerText="Meta" />
+                            <p:column headerText="Nivel Jerarquico" />
+                            <p:column headerText="Responsable" />                            
+                            <p:column headerText="Opciones" />                            
+                        </p:row>
+                    </p:columnGroup>
+
+                    <p:column><h:outputText value="#{item.estrategiaValor}" /></p:column>
+                    <p:column><h:outputText value="#{item.objetivo}" /></p:column>
+                    <p:column><h:outputText value="#{item.indicador}" /></p:column>
+                    <p:column><h:outputText value="#{item.definicionOperacional}" /></p:column>
+                    <p:column><h:outputText value="#{item.frecuencia.nombre}" /></p:column>
+                    <p:column><h:outputText value="#{item.minimo}" /></p:column>
+                    <p:column><h:outputText value="#{item.meta}" /></p:column>
+                    <p:column><h:outputText value="#{item.nivelOperativo.nombre}" /></p:column>
+                    <p:column><h:outputText value="#{item.empleado.nombres} #{item.empleado.apellidos}" /></p:column>
+
+                    <p:column>
+                        <p:commandButton update=":frmModal" icon="ui-icon-pencil"
+                                         title="Editar" oncomplete="PF('modal').show();"
+                                         actionListener="#{cmiController.seleccionarPersectiva(2)}">
+                            <f:setPropertyActionListener target="#{cmiController.current}" value="#{item}" />
+                        </p:commandButton>
+                        <p:commandButton rendered="false" update=":#{p:component('frmFinanciera')}" icon="ui-icon-trash"
+                                         title="Eliminar" actionListener="#{cmiController.delete(2, item)}">                                                        
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+
+
+        <h:form id="frmProcesos">
+            <p:panel header="PERSPECTIVA PROCESOS INTERNOS" toggleable="true" toggleSpeed="500" widgetVar="pnProcesos" style="margin-bottom:20px">   
+                <f:facet name="actions">
+                    <p:commandLink styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"
+                                   actionListener="#{cmiController.seleccionarPersectiva(3)}"
+                                   oncomplete="PF('modal').show();">
+                        <h:outputText styleClass="ui-icon ui-icon-document" title="Nuevo Registro"  />
+                    </p:commandLink>
+                    <p:commandLink styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"
+                                   onclick="PF('pnFinanciera').toggle()"
+                                   oncomplete="PF('modal').show();">
+                        <h:outputText styleClass="ui-icon-newwin" title="Toggle"  />
+                    </p:commandLink>
+                </f:facet>
+
+                <p:dataTable value="#{cmiController.listProceso}" var="item">
+
+                   <p:columnGroup type="header">                     
+                        <p:row>
+                            <p:column colspan="2" headerText="DIRECCIÓN - OBJETIVOS ESTRATÉGICOS" />
+                            <p:column colspan="4" headerText="MEDIDAS" />
+                            <p:column colspan="3" headerText="METAS" />                            
+                        </p:row>
+                        <p:row>
+                            <p:column headerText="Estrategia Valor" />
+                            <p:column headerText="Objetivo" />
+                            <p:column headerText="Indicador" />
+                            <p:column headerText="Definicion Operacional" />
+                            <p:column headerText="Frecuencia" />
+                            <p:column headerText="Nivel Base" />
+                            <p:column headerText="Meta" />
+                            <p:column headerText="Nivel Jerarquico" />
+                            <p:column headerText="Responsable" />                            
+                            <p:column headerText="Opciones" />                            
+                        </p:row>
+                    </p:columnGroup>
+
+                    <p:column><h:outputText value="#{item.estrategiaValor}" /></p:column>
+                    <p:column><h:outputText value="#{item.objetivo}" /></p:column>
+                    <p:column><h:outputText value="#{item.indicador}" /></p:column>
+                    <p:column><h:outputText value="#{item.definicionOperacional}" /></p:column>
+                    <p:column><h:outputText value="#{item.frecuencia.nombre}" /></p:column>
+                    <p:column><h:outputText value="#{item.minimo}" /></p:column>
+                    <p:column><h:outputText value="#{item.meta}" /></p:column>
+                    <p:column><h:outputText value="#{item.nivelOperativo.nombre}" /></p:column>
+                    <p:column><h:outputText value="#{item.empleado.nombres} #{item.empleado.apellidos}" /></p:column>
+
+                    <p:column>
+                        <p:commandButton update=":frmModal" icon="ui-icon-pencil"
+                                         title="Editar" oncomplete="PF('modal').show();"
+                                         actionListener="#{cmiController.seleccionarPersectiva(3)}">
+                            <f:setPropertyActionListener target="#{cmiController.current}" value="#{item}" />
+                        </p:commandButton>
+                        <p:commandButton rendered="false" update=":#{p:component('frmFinanciera')}" icon="ui-icon-trash"
+                                         title="Eliminar" actionListener="#{cmiController.delete(3, item)}">                                                        
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+
+
+        <h:form id="frmAprendizaje">
+            <p:panel header="PERSPECTIVA APRENDIZAJE CRECIMIENTO" toggleable="true" toggleSpeed="500" widgetVar="pnAprendizaje" style="margin-bottom:20px">   
+                <f:facet name="actions">
+                    <p:commandLink styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"
+                                   actionListener="#{cmiController.seleccionarPersectiva(4)}"
+                                   oncomplete="PF('modal').show();">
+                        <h:outputText styleClass="ui-icon ui-icon-document" title="Nuevo Registro"  />
+                    </p:commandLink>
+                    <p:commandLink styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"
+                                   onclick="PF('pnFinanciera').toggle()"
+                                   oncomplete="PF('modal').show();">
+                        <h:outputText styleClass="ui-icon-newwin" title="Toggle"  />
+                    </p:commandLink>
+                </f:facet>
+
+                <p:dataTable value="#{cmiController.listAprendizaje}" var="item">
+
+                    <p:columnGroup type="header">                     
+                        <p:row>
+                            <p:column colspan="2" headerText="DIRECCIÓN - OBJETIVOS ESTRATÉGICOS" />
+                            <p:column colspan="4" headerText="MEDIDAS" />
+                            <p:column colspan="3" headerText="METAS" />                            
+                        </p:row>
+                        <p:row>
+                            <p:column headerText="Estrategia Valor" />
+                            <p:column headerText="Objetivo" />
+                            <p:column headerText="Indicador" />
+                            <p:column headerText="Definicion Operacional" />
+                            <p:column headerText="Frecuencia" />
+                            <p:column headerText="Nivel Base" />
+                            <p:column headerText="Meta" />
+                            <p:column headerText="Nivel Jerarquico" />
+                            <p:column headerText="Responsable" />                            
+                            <p:column headerText="Opciones" />                            
+                        </p:row>
+                    </p:columnGroup>
+
+                    <p:column><h:outputText value="#{item.estrategiaValor}" /></p:column>
+                    <p:column><h:outputText value="#{item.objetivo}" /></p:column>
+                    <p:column><h:outputText value="#{item.indicador}" /></p:column>
+                    <p:column><h:outputText value="#{item.definicionOperacional}" /></p:column>
+                    <p:column><h:outputText value="#{item.frecuencia.nombre}" /></p:column>
+                    <p:column><h:outputText value="#{item.minimo}" /></p:column>
+                    <p:column><h:outputText value="#{item.meta}" /></p:column>
+                    <p:column><h:outputText value="#{item.nivelOperativo.nombre}" /></p:column>
+                    <p:column><h:outputText value="#{item.empleado.nombres} #{item.empleado.apellidos}" /></p:column>
+
+                    <p:column>
+                        <p:commandButton update=":frmModal" icon="ui-icon-pencil"
+                                         title="Editar" oncomplete="PF('modal').show();"
+                                         actionListener="#{cmiController.seleccionarPersectiva(4)}">
+                            <f:setPropertyActionListener target="#{cmiController.current}" value="#{item}" />
+                        </p:commandButton>
+                        <p:commandButton rendered="false" update=":#{p:component('frmFinanciera')}" icon="ui-icon-trash"
+                                         title="Eliminar" actionListener="#{cmiController.delete(4, item)}">                                                        
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+
+
+        <p:dialog widgetVar="modal" header="Nuevo Registro CMI" 
+                  modal="true" closable="true" minimizable="false" resizable="false"  maximizable="false" >
+            <h:form id="frmModal">
+                <h:panelGrid columns="4">
+                    <p:panel header="DIRECCIÓN - OBJETIVOS ESTRATÉGICOS">
+                        <h:panelGrid columns="2">          
+                            <h:outputLabel value="Estrategia Valor" for="estrategia" />
+                            <p:inputText id="estrategia" required="true"
+                                         value="#{cmiController.current.estrategiaValor}" />
+
+                            <h:outputLabel value="Objetivo" for="objetivo" />
+                            <p:inputText id="objetivo" required="true"
+                                         value="#{cmiController.current.objetivo}" />                                                        
+                        </h:panelGrid>
+                    </p:panel>
+
+                    <p:panel header="MEDIDAS">
+                        <h:panelGrid columns="2">                    
+                            <h:outputLabel value="Indicador" for="indicador" />
+                            <p:inputText id="indicador" required="true"
+                                         value="#{cmiController.current.indicador}" />   
+
+                            <h:outputLabel value="Definicion Operacional" for="definicion" />
+                            <p:inputText id="definicion" required="true"
+                                         value="#{cmiController.current.definicionOperacional}" /> 
+
+                            <h:outputLabel value="Frecuencia" for="frecuencia" />
+                            <p:selectOneMenu id="frecuencia" 
+                                             value="#{cmiController.idFrecuencia}"					
+                                             required="true" >
+                                <f:selectItems value="#{cmiController.comboFrecuencia}" />                                            
+                            </p:selectOneMenu>
+
+                            <h:outputLabel value="Nivel Base" for="nivel" />
+                            <p:inputText id="nivel" required="true"
+                                         value="#{cmiController.current.minimo}" /> 
+                        </h:panelGrid>
+                    </p:panel>
+
+                    <p:panel header="METAS">
+                        <h:panelGrid columns="2">                    
+                            <h:outputLabel value="Meta" for="meta" />
+                            <p:inputText id="meta" required="true"
+                                         value="#{cmiController.current.meta}" />  
+
+                            <h:outputLabel value="Nivel Jerarquico" for="nivelPadre" />
+                            <p:selectOneMenu id="nivelPadre" 
+                                             value="#{cmiController.idNivelPadre}"					
+                                             required="true" >
+                                <f:selectItems value="#{cmiController.comboNivelPadre}" />           
+                                <p:ajax process="@this" listener="#{cmiController.loadCombosByNivel}" event="change" update="nivelHijo, responsable" />
+                            </p:selectOneMenu>
+
+                            <h:outputLabel value="Sub Nivel" for="nivelHijo" />
+                            <p:selectOneMenu id="nivelHijo" 
+                                             value="#{cmiController.idNivelHijo}"					
+                                             >
+                                <f:selectItems value="#{cmiController.comboNivelHijo}" />
+                            </p:selectOneMenu>
+
+                            <h:outputLabel value="Responsable" for="responsable" />
+                            <p:selectOneMenu id="responsable" 
+                                             value="#{cmiController.idResponsable}"					
+                                             required="true" >
+                                <f:selectItems value="#{cmiController.comboResponsable}" />                                   
+                            </p:selectOneMenu>
+
+                        </h:panelGrid>
+                    </p:panel>
+                </h:panelGrid>
+
+                <h:panelGrid columns="5">
+                    <p:commandButton actionListener="#{cmiController.create}"
+                                     value="Guardar" update=":#{p:component('frmModal')},
+                                     :#{p:component('frmFinanciera')},
+                                     :#{p:component('frmCliente')},
+                                     :#{p:component('frmProcesos')},
+                                     :#{p:component('frmAprendizaje')}"
+                                     oncomplete="PF('modal').hide();"/>
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+    </ui:define>
+</ui:composition>

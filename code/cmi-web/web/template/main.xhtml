@@ -1,143 +1,68 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-    <f:view contentType="text/html">
-        <h:head>
-            <f:facet name="first">
-                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>                
-                <title>PrimeFaces</title>
-                <link rel="stylesheet" href="../resources/css/bootstrap.min.css" />
-            </f:facet>
-        </h:head>
 
-        <h:body>
-             <div class="col-xs-12 cuadro">
-            <div class="row">
-                <div class="col-xs-12 cuadro" style="height:50px;">
-                    ENCABEZADO
+    <h:head>
+        <meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+        <title>CMI</title>
+        <link rel="stylesheet" href="../resources/css/bootstrap.min.css" />
+        <h:outputStylesheet library="css" name="jsfcrud.css" />
+    </h:head>
+
+    <h:body>
+        <div class="col-xs-12 cuadro" style="text-align: center;">
+            <div class="row" >
+                <div class="col-xs-12 cuadro" style="height: 50px;">
+                    <h2>SISTEMA CUADRO DE MANDO INTEGRAL</h2>
+                
                 </div>
             </div>
-            <div>  
+
             <div class="row">
-                <div class="col-md-3 col-xs-12 cuadro" style="border: #000 solid thin;">
-                    MENU
-                    <p:menu>
-                        <p:submenu label="Resources">
-                            <p:menuitem value="Demo" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
-                            <p:menuitem value="Documentation" url="http://www.primefaces.org/documentation.html" />
-                            <p:menuitem value="Forum" url="http://forum.primefaces.org/" />
-                            <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
-                        </p:submenu>
-                    </p:menu>
+                <div class="col-xs-12 cuadro" style="border: #269abc solid thin;">                    
+                    <p:menubar>
+                        
+                            <p:menuitem value="Empleados" 
+                                        url="/pages/adminEmpleado.jsf" />
+                            <p:menuitem value="Configuracion de CMI"
+                                        url="/pages/adminCMI.jsf" />
+                            <p:menuitem value="Ingresar Datos" 
+                                        url="/pages/ingresoDatos.jsf" />
+                            <p:menuitem value="Reportes"
+                                        url="/pages/reportes.jsf" />
+                            <p:menuitem value="DashBoard"
+                                        url="/pages/dashboard.jsf" />
+                        
+                    </p:menubar>
                 </div>
-                <div class="col-md-9 col-xs-12 cuadro" >
-                    CONTENIDO
-                    <div class="row">
-                        <div class="col-md-6 col-xs-12 cuadro">
-                            <p:panel header="PANEL 1 PRIMEFACES">
-                                <h:panelGrid columns="2">
-                                    <h:outputLabel value="Nombre" for="txtNombre1" />
-                                    <h:inputText class="col-md-8" id="txtNombre1" />
-                                    
-                                </h:panelGrid>
-                            </p:panel>
-                                <div class="panel panel-primary">
-                                    <div class="panel-heading">
-                                        Formulario Principal
-                                    </div>
-                                    <div class="panel-body">
-                                        <form name="form" class="form-horizontal">
-                                            <div class="form-group">
-                                                <label for="txtCedula" class="col-md-3">Cedula:</label>
-                                                <input type="text" class="col-md-8" id="txtCedula" placeholder="Ingrese la cedula"/>
-                                            </div>    
-                                            <div class="form-group">        
-                                                <label for="txtNombre" class="col-md-3">Nombre:</label>
-                                                <input type="text" class="col-md-8" id="txtNombre" placeholder="Ingrese el nombre"/>
-                                            </div>
-                                            <div class="form-group">        
-                                                <label for="txtApellido" class="col-md-3">Apellido:</label>
-                                                <input type="text" class="col-md-8" id="txtApellido" placeholder="Ingrese el apellido"/>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                        </div>
-                        <div class="col-md-6 col-xs-12 cuadro">
-                             <p:panel header="PANEL 2 PRIMEFACES">
-                                PANEL 2 PRIMEFACES
-                            </p:panel>
-                                <div class="panel panel-info">
-                                    <div class="panel-heading">
-                                        Formulario de Informacion
-                                    </div>
-                                    <div class="panel-body">
-                                        <form name="form" class="form-horizontal">
-                                            <div class="form-group">
-                                                <label for="txtCedula" class="col-md-3">Cedula:</label>
-                                                <input type="text" class="col-md-8" id="txtCedula" placeholder="Ingrese la cedula"/>
-                                            </div>    
-                                            <div class="form-group">        
-                                                <label for="txtNombre" class="col-md-3">Nombre:</label>
-                                                <input type="text" class="col-md-8" id="txtNombre" placeholder="Ingrese el nombre"/>
-                                            </div>
-                                            <div class="form-group">        
-                                                <label for="txtApellido" class="col-md-3">Apellido:</label>
-                                                <input type="text" class="col-md-8" id="txtApellido" placeholder="Ingrese el apellido"/>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
+            </div>
 
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 cuadro" >
-                            <!--<table class="table table-striped">-->
-                            <table class="table table-striped table-bordered table-hover table-condensed">
-                                <tr>
-                                    <td>Posicion</td>
-                                    <td>Pais</td>
-                                    <td>Continente</td>
-                                </tr>                                
-                                <tr>
-                                    <td>1</td>
-                                    <td>Alemania</td>
-                                    <td>Europa</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Argentina</td>
-                                    <td>America</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Holanda</td>
-                                    <td>Europa</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Brasil</td>
-                                     <td>America</td>
-                                </tr>
-                            </table>
-                            <input class="btn btn-primary" type="button" value="Guardar" />
-                            <input class="btn btn-default" type="button" value="Cancelar" />
-                        </div>
-                    </div>
+            <div class="row">
+                <div class="col-xs-12 cuadro" style="border: #000 solid thin;">
+                    <h1>
+                        <ui:insert name="title">Default Title</ui:insert>
+                    </h1>
 
+                    <p>
+                        <ui:insert name="contenido" />
+
+                        <h:panelGroup id="pnMensajes" layout="block">
+                            <h:messages errorStyle="color: red" infoStyle="color: green"
+                                        layout="table" />
+                        </h:panelGroup>
+                    </p>
                 </div>
             </div>
         </div>
-             </div>
 
-           
-        </h:body>
 
-    </f:view>
+    </h:body>
+
+
 </html>
 

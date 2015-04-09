@@ -1,0 +1,83 @@
+<ui:composition template="../template/main.xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="title">
+        <h:outputText value="Empleados"></h:outputText>
+    </ui:define>
+
+    <ui:define name="contenido">
+        
+        <h:form id="frmData">            
+            <h:panelGrid columns="5">
+                <p:commandButton actionListener="#{empleadoController.create}"
+                                 value="Guardar" update=":#{p:component('frmData')},:#{p:component('frmTable')}" />
+            </h:panelGrid>
+
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Cedula" for="cedula" />
+                <p:inputText id="cedula" required="true"
+                             value="#{empleadoController.current.cedula}" />
+
+                <h:outputLabel value="Nombres" for="nombres" />
+                <p:inputText id="nombres" required="true"
+                             value="#{empleadoController.current.nombres}" />
+
+                <h:outputLabel value="Apellidos" for="apellidos" />
+                <p:inputText id="apellidos" required="true"
+                             value="#{empleadoController.current.apellidos}" />
+
+                <h:outputLabel value="Departamento" for="area" />
+                <p:selectOneMenu id="departamento" 
+                                 value="#{empleadoController.idDepartamento}"					
+                                 required="true" >
+                    <f:selectItems value="#{empleadoController.comboDepartamentos}" />                    
+                    <p:ajax process="@this" listener="#{empleadoController.setComboCargo}" event="change" update="cargo" />
+                </p:selectOneMenu>
+
+                <h:outputLabel value="Cargo" for="area" />
+                <p:selectOneMenu id="cargo" 
+                                 value="#{empleadoController.idCargo}"					
+                                 required="true">
+                    <f:selectItems value="#{empleadoController.comboCargos}" />
+                </p:selectOneMenu>
+            </h:panelGrid>
+        </h:form>
+
+        <h:form id="frmTable">
+            <h:panelGrid>
+                <h:panelGroup rendered="#{!empty empleadoController.items}">
+                    <p:dataTable value="#{empleadoController.items}" var="item"
+                                 paginator="true" rows="10" paginatorPosition="bottom"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                 rowsPerPageTemplate="10">
+
+                        <p:column headerText="Nombres">
+                            <h:outputText value="#{item.nombres}" />
+                        </p:column>
+
+                        <p:column headerText="Apellidos">
+                            <h:outputText value="#{item.apellidos}" />
+                        </p:column>
+                        
+                        <p:column headerText="Departamento">
+                            <h:outputText value="#{item.departamento.nombre}" />
+                        </p:column>
+                        
+                        <p:column headerText="Cargo">
+                            <h:outputText value="#{item.cargo.nombre}" />
+                        </p:column>
+
+                        <p:column headerText="Opciones">
+                            <p:commandButton update=":frmData" icon="ui-icon-pencil"
+                                             title="Editar">
+                                <f:setPropertyActionListener target="#{empleadoController.current}" value="#{item}" />
+                            </p:commandButton>                           
+                        </p:column>
+                    </p:dataTable>
+                </h:panelGroup>
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:composition>

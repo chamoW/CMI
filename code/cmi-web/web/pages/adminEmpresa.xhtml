@@ -1,0 +1,75 @@
+<ui:composition template="../template/main.xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="title">
+        <h:outputText value="#{bundle.CreateObjetivoTitle}"></h:outputText>
+    </ui:define>
+
+    <ui:define name="contenido">
+        <h:form id="frmData">
+            <h:panelGrid columns="5">
+
+                <p:commandButton actionListener="#{empresaController.create}"
+                                 value="Guardar" update=":#{p:component('frmData')},:#{p:component('frmTable')}" />
+
+                <p:commandButton actionListener="#{empresaController.edit()}"
+                                 value="Actualizar" update=":#{p:component('frmData')},:#{p:component('frmTable')}" />
+            </h:panelGrid>
+
+            <h:panelGrid columns="2">
+                <h:outputLabel value="#{bundle.CreateObjetivoLabel_nombre}"
+                               for="nombre" />
+                <p:inputText id="nombre" required="true"
+                             value="#{empresaController.current.nombre}"
+                             title="#{bundle.CreateObjetivoTitle_nombre}" />
+
+                <h:outputLabel value="Direcion"
+                               for="direccion" />
+                <p:inputText id="direccion" required="true"
+                             value="#{empresaController.current.direccion}"/>
+
+
+            </h:panelGrid>
+
+        </h:form>
+
+        <h:form id="frmTable">
+            <h:panelGrid>
+
+                <h:panelGroup rendered="#{!empty empresaController.items}">
+
+                    <p:dataTable value="#{empresaController.items}" var="item"
+                                 paginator="true" rows="10"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="10">
+
+                        <p:column headerText="#{bundle.ListObjetivoTitle_nombre}">
+                            <h:outputText value="#{item.nombre}" />
+                        </p:column>
+
+                        <p:column headerText="Direccion">
+                            <h:outputText value="#{item.direccion}" />
+                        </p:column>
+
+                        <p:column headerText="Opciones">
+
+                            <p:commandButton update=":frmData" icon="ui-icon-pencil"
+                                             title="Editar">
+                                <f:setPropertyActionListener target="#{empresaController.current}" value="#{item}" />
+                            </p:commandButton>
+
+                            <h:commandLink action="#{empresaController.destroy}"
+                                           value="#{bundle.ListObjetivoDestroyLink}" />
+                        </p:column>
+                    </p:dataTable>
+                </h:panelGroup>
+            </h:panelGrid>
+
+
+
+
+        </h:form>
+    </ui:define>
+</ui:composition>

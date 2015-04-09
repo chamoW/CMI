@@ -20,16 +20,9 @@
         <class>com.triskel.cmi.dal.model.MatrizFa</class>
         <class>com.triskel.cmi.dal.model.MatrizFo</class>
         <class>com.triskel.cmi.dal.model.Tabla</class>
-        <class>com.triskel.cmi.dal.model.Cmi</class>     
-        <class>com.triskel.cmi.dal.model.NivelOperativo</class>  
-        <class>com.triskel.cmi.dal.model.Objetivo</class>
-        <class>com.triskel.cmi.dal.model.Empleado</class>
-        <class>com.triskel.cmi.dal.model.Departamento</class>
-        <class>com.triskel.cmi.dal.model.Cargo</class>
-        <class>com.triskel.cmi.dal.model.Frecuencia</class>
-        <class>com.triskel.cmi.dal.model.Perspectiva</class>
+               
         
-        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>				            
             <!--<property name="openjpa.jdbc.DBDictionary" value="postgres" />-->            
         </properties>

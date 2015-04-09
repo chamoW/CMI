@@ -1,0 +1,116 @@
+<ui:composition template="../template/main.xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="title">
+        <h:outputText value="Ingreso de datos"></h:outputText>
+    </ui:define>
+
+    <ui:define name="contenido">
+        <h:form id="frmIngreso">
+            <h:panelGrid columns="2">
+                <h:panelGrid width="100">
+                    <p:panel header="Perspectiva">
+                        <p:dataTable value="#{ingresoController.listPerspectiva}" var="item" selectionMode="single"
+                                     selection="#{ingresoController.selectedPerspectiva}"
+                                     rowKey="#{item.id}">
+                            <p:ajax event="rowSelect" listener="#{ingresoController.onRowSelect}" update=":#{p:component('objetivo')}, :#{p:component('frmDatos')}, :#{p:component('frmTableDatos')}" />
+                            <p:column><h:outputText value="#{item.nombre}" /></p:column>
+                        </p:dataTable>
+                    </p:panel>
+                </h:panelGrid>
+
+                <h:panelGrid id="objetivo">
+                    <p:panel header="Objetivos">
+                        <p:dataTable value="#{ingresoController.listCmi}" var="item" selectionMode="single"
+                                     selection="#{ingresoController.selectedCmi}"
+                                     rowKey="#{item.id}">
+                            <p:ajax event="rowSelect" listener="#{ingresoController.onRowSelectCmi}" update=":#{p:component('frmDatos')}, :#{p:component('frmTableDatos')}" />
+                            <p:column><h:outputText value="#{item.objetivo}" /></p:column>
+                        </p:dataTable>
+                    </p:panel>
+                </h:panelGrid>
+            </h:panelGrid>
+        </h:form>
+
+       <p:separator style="height:2px" />
+
+        <h:form id="frmDatos">                          
+            <h:panelGrid rendered="#{ingresoController.selectedCmi != null}" style="text-align: left; width: 100%">
+                <h3>Datos del objetivo</h3>
+                <h:panelGrid columns="10"  style="text-align: left; width: 100%">                   
+                    <h:outputLabel value="Objetivo: " />
+                    <h:outputText value="#{ingresoController.selectedCmi.objetivo}" />
+
+                    <h:outputLabel value="Definicion: " />
+                    <h:outputText value="#{ingresoController.selectedCmi.definicionOperacional}" />
+
+
+                    <h:outputLabel value="Frecuencia: " />
+                    <h:outputText value="#{ingresoController.selectedCmi.frecuencia.nombre}" />
+
+                    <h:outputLabel value="Indicador: " />
+                    <h:outputText value="#{ingresoController.selectedCmi.indicador}" />
+
+                    <h:outputLabel value="Nivel Base: " />
+                    <h:outputText value="#{ingresoController.selectedCmi.minimo}" />
+                    
+                    <h:outputLabel value="Meta: " />
+                    <h:outputText value="#{ingresoController.selectedCmi.meta}" />
+                </h:panelGrid> <br/>
+
+                <h3>Datos</h3>
+                <h:panelGrid>                    
+                    <h:panelGrid  columns="2">
+                        <h:outputLabel value="Descripion" for="descripcion" />
+                        <h:outputLabel id="descripcion" 
+                                       value="#{ingresoController.current.descripcion}" />
+
+                        <h:outputLabel value="Valor" for="valor" />
+                        <p:inputText id="valor" required="true"
+                                     value="#{ingresoController.current.valor}" />
+                    </h:panelGrid>
+                    <h:panelGrid columns="5">
+                        <p:commandButton actionListener="#{ingresoController.create}"
+                                         value="Guardar" update=":#{p:component('frmDatos')}, :#{p:component('frmTableDatos')}" />
+                    </h:panelGrid>
+                </h:panelGrid>
+            </h:panelGrid>
+        </h:form>
+
+        <h:form id="frmTableDatos">
+            <h:panelGrid rendered="#{!empty ingresoController.items}">
+                <p:dataTable value="#{ingresoController.items}" var="item"
+                             paginator="true" rows="10" paginatorPosition="bottom"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                             rowsPerPageTemplate="10">
+
+                    <p:column headerText="Descripcion">
+                        <h:outputText value="#{item.descripcion}" />
+                    </p:column>
+
+                    <p:column headerText="Valor">
+                        <h:outputText value="#{item.valor}" />
+                    </p:column>
+                    
+                    <p:column headerText="Semaforo">
+                        <p:graphicImage value="/resources/images/verde.png" rendered="#{item.semaforoAux == 1}"/>                                         
+                        <p:graphicImage value="/resources/images/naranja.png" rendered="#{item.semaforoAux == 0}"/>                                         
+                        <p:graphicImage value="/resources/images/rojo.png" rendered="#{item.semaforoAux == -1}"/>                                         
+                    </p:column>
+
+                    <p:column headerText="Opciones">
+                        <p:commandButton update=":#{p:component('frmDatos')}" icon="ui-icon-pencil"
+                                         title="Editar">
+                            <f:setPropertyActionListener target="#{ingresoController.current}" value="#{item}" />
+                        </p:commandButton>                      
+                    </p:column>
+                </p:dataTable>
+            </h:panelGrid>
+        </h:form>
+
+
+
+    </ui:define>
+</ui:composition>
