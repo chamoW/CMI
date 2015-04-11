@@ -10,7 +10,7 @@
     <h:head>
         <meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
         <title>CMI</title>
-        <link rel="stylesheet" href="../resources/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/resources/css/bootstrap.min.css" />
         <h:outputStylesheet library="css" name="jsfcrud.css" />
     </h:head>
 
@@ -19,26 +19,13 @@
             <div class="row" >
                 <div class="col-xs-12 cuadro" style="height: 50px;">
                     <h2>SISTEMA CUADRO DE MANDO INTEGRAL</h2>
-                
+
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-xs-12 cuadro" style="border: #269abc solid thin;">                    
-                    <p:menubar>
-                        
-                            <p:menuitem value="Empleados" 
-                                        url="/pages/adminEmpleado.jsf" />
-                            <p:menuitem value="Configuracion de CMI"
-                                        url="/pages/adminCMI.jsf" />
-                            <p:menuitem value="Ingresar Datos" 
-                                        url="/pages/ingresoDatos.jsf" />
-                            <p:menuitem value="Reportes"
-                                        url="/pages/reportes.jsf" />
-                            <p:menuitem value="DashBoard"
-                                        url="/pages/dashboard.jsf" />
-                        
-                    </p:menubar>
+                    <ui:include src="menu.xhtml" />
                 </div>
             </div>
 
@@ -49,14 +36,14 @@
                     </h1>
 
                     <p>
-                        <ui:insert name="contenido" />
-
-                        <h:panelGroup id="pnMensajes" layout="block">
-                            <h:messages errorStyle="color: red" infoStyle="color: green"
-                                        layout="table" />
-                        </h:panelGroup>
+                        <ui:insert name="contenido" />                    
                     </p>
+
                 </div>
+                <h:panelGroup id="pnMensajes" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green"
+                                layout="table" />
+                </h:panelGroup>
             </div>
         </div>
 

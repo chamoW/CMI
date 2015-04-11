@@ -5,10 +5,11 @@
         <group>
             <file>file:/F:/WorkSpaces/workspace_Wladdy/CMI/code/cmi-web/src/java/com/triskel/cmi/web/controllers/CmiController.java</file>
             <file>file:/F:/WorkSpaces/workspace_Wladdy/CMI/code/cmi-web/web/pages/ingresoDatos.xhtml</file>
-            <file>file:/F:/WorkSpaces/workspace_Wladdy/CMI/code/cmi-web/src/java/com/triskel/cmi/web/controllers/EmpleadoController.java</file>
             <file>file:/F:/WorkSpaces/workspace_Wladdy/CMI/code/cmi-web/web/pages/adminCMI.xhtml</file>
+            <file>file:/F:/WorkSpaces/workspace_Wladdy/CMI/code/cmi-web/web/resources/css/jsfcrud.css</file>
             <file>file:/F:/WorkSpaces/workspace_Wladdy/CMI/code/cmi-web/src/java/com/triskel/cmi/web/controllers/IngresoController.java</file>
             <file>file:/F:/WorkSpaces/workspace_Wladdy/CMI/code/cmi-web/web/pages/adminEmpleado.xhtml</file>
+            <file>file:/F:/WorkSpaces/workspace_Wladdy/CMI/code/cmi-web/web/template/main.xhtml</file>
         </group>
     </open-files>
 </project-private>

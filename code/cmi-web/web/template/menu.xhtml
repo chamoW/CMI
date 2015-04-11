@@ -1,0 +1,22 @@
+<ui:composition    
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+    <p:menubar>        
+        <p:submenu label="CMI" icon="ui-icon-flag">
+            <p:menuitem value="Empleados"  url="/pages/adminEmpleado.jsf" />
+            <p:separator />
+            <p:menuitem value="Configuracion de CMI" url="/pages/adminCMI.jsf" />
+            <p:separator />
+            <p:menuitem value="Ingresar Datos" url="/pages/ingresoDatos.jsf" />
+        </p:submenu>       
+
+        <p:submenu label="Reportes" icon="ui-icon-document-b">        
+            <p:menuitem value="DashBoard" url="/pages/dashboard.jsf" />        
+        </p:submenu>
+    </p:menubar>
+
+</ui:composition>      

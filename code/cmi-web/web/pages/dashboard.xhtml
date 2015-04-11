@@ -1,0 +1,78 @@
+<ui:composition template="../template/main.xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="title">
+        <h:outputText value="DASHBOARD"></h:outputText>
+    </ui:define>
+
+    <ui:define name="contenido">
+        <h:form id="frmDatos">
+            <h:panelGrid columns="2">
+                <h:panelGrid width="100">
+                    <p:panel header="Perspectiva">
+                        <p:dataTable value="#{dashBoardController.listPerspectiva}" var="item" selectionMode="single"
+                                     selection="#{dashBoardController.selectedPerspectiva}"
+                                     rowKey="#{item.id}">
+                            <p:ajax event="rowSelect" listener="#{dashBoardController.onRowSelect}" update=":#{p:component('objetivo')}, :#{p:component('frmDashboard')}" />
+                            <p:column><h:outputText value="#{item.nombre}" /></p:column>
+                        </p:dataTable>
+                    </p:panel>
+                </h:panelGrid>
+
+                <h:panelGrid id="objetivo">
+                    <p:panel header="Objetivos">
+                        <p:dataTable value="#{dashBoardController.listCmi}" var="item" selectionMode="single"
+                                     selection="#{dashBoardController.selectedCmi}"
+                                     rowKey="#{item.id}">
+                            <p:ajax event="rowSelect" listener="#{dashBoardController.onRowSelectCmi}" update=":#{p:component('frmDashboard')}" />
+                            <p:column><h:outputText value="#{item.objetivo}" /></p:column>
+                        </p:dataTable>
+                    </p:panel>
+                </h:panelGrid>
+            </h:panelGrid>
+        </h:form>
+
+        <p:separator style="height:2px" />
+
+        <h:form id="frmDashboard">                          
+            <h:panelGrid columns="2" rendered="#{dashBoardController.selectedCmi !=null}" style="text-align: left; width: 100%" >
+                <h:panelGrid columns="2" rendered="#{dashBoardController.selectedCmi !=null}" style="text-align: left; width: 100%" >
+                    <p:panel>
+                        <p:chart type="pie" model="#{dashBoardController.pieModel1}" style="height:300px" /> 
+                    </p:panel>
+
+                    <p:panel>
+                        <p:chart type="bar" model="#{dashBoardController.barModel}" style="height:300px"/>                    
+                    </p:panel>
+
+                    <p:panel>
+                        <p:chart type="bubble" model="#{dashBoardController.bubbleModel2}" />
+                    </p:panel>
+
+                    <p:panel>
+                        <p:chart type="metergauge" model="#{dashBoardController.meterGaugeModel1}" style="height:300px" />
+                    </p:panel>
+                </h:panelGrid>
+
+                <p:dataTable value="#{dashBoardController.items}" var="item">
+
+                    <p:column headerText="Descripcion">
+                        <h:outputText value="#{item.descripcion}" />
+                    </p:column>
+
+                    <p:column headerText="Valor">
+                        <h:outputText value="#{item.valor}" />
+                    </p:column>
+
+                    <p:column headerText="Semaforo">
+                        <p:graphicImage value="/resources/images/verde.png" rendered="#{item.semaforoAux == 1}"/>                                         
+                        <p:graphicImage value="/resources/images/naranja.png" rendered="#{item.semaforoAux == 0}"/>                                         
+                        <p:graphicImage value="/resources/images/rojo.png" rendered="#{item.semaforoAux == -1}"/>                                         
+                    </p:column>                   
+                </p:dataTable>
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:composition>
